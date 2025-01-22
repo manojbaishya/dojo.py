@@ -12,3 +12,8 @@ def memo_mc(coin_value_list, change, known_results):
                 min_coins = num_coins
             known_results[change] = min_coins
     return min_coins
+
+
+if __name__ == "__main__":
+    print("memoized_coin_change.py")
+    print(memo_mc([1, 5, 10, 25], 63, {}))
