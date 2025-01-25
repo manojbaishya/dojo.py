@@ -6,7 +6,8 @@ def memo_mc(coin_value_list, change, known_results):
     elif change in known_results:
         return known_results[change]
     else:
-        for i in [c for c in coin_value_list if c <= change]:
+        new_coin_list = [c for c in coin_value_list if c <= change]
+        for i in new_coin_list:
             num_coins = 1 + memo_mc(coin_value_list, change - i, known_results)
             if num_coins < min_coins:
                 min_coins = num_coins
@@ -14,6 +15,15 @@ def memo_mc(coin_value_list, change, known_results):
     return min_coins
 
 
+def dp_make_change(coin_value_list, change):
+    min_coins = [None] * (change + 1)
+    for cents in range(change + 1):
+        min_coins[cents] = cents
+        for c in coin_value_list:
+            if cents >= c:
+                min_coins[cents] = min(min_coins[cents], min_coins[cents - c] + 1)
+    return min_coins[change]
+
+
 if __name__ == "__main__":
-    print("memoized_coin_change.py")
-    print(memo_mc([1, 5, 10, 25], 63, {}))
+    print(dp_make_change([1, 5, 10, 25], 63))
