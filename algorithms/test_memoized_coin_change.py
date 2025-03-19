@@ -1,3 +1,5 @@
+from typing import Dict, List
+
 import pytest
 from memoized_coin_change import dp_make_change, memo_mc
 
@@ -10,8 +12,8 @@ from memoized_coin_change import dp_make_change, memo_mc
         ([2, 5], 7, 2),
     ],
 )
-def test_memo_mc(coin_value_list, change, expected_min_coins):
-    known_results = {}
+def test_memo_mc(coin_value_list: List[int], change: int, expected_min_coins: int):
+    known_results: Dict[int, int] = {}
 
     actual_min_coins = memo_mc(coin_value_list, change, known_results)
 
@@ -19,13 +21,13 @@ def test_memo_mc(coin_value_list, change, expected_min_coins):
     print(f"actual_min_coins: {actual_min_coins}")
     print(f"expected_min_coins: {expected_min_coins}")
 
-    assert actual_min_coins == expected_min_coins, (
-        f"Expected {expected_min_coins}, but got {actual_min_coins}"
-    )
+    assert (
+        actual_min_coins == expected_min_coins
+    ), f"Expected {expected_min_coins}, but got {actual_min_coins}"
 
-    assert change in known_results, (
-        "The known_results dictionary should contain the result for the input change."
-    )
+    assert (
+        change in known_results
+    ), "The known_results dictionary should contain the result for the input change."
 
 
 @pytest.mark.parametrize(
@@ -36,13 +38,15 @@ def test_memo_mc(coin_value_list, change, expected_min_coins):
         ([2, 5], 7, 2),
     ],
 )
-def test_dp_make_change(coin_value_list, change, expected_min_coins):
+def test_dp_make_change(
+    coin_value_list: List[int], change: int, expected_min_coins: int
+):
     actual_min_coins = dp_make_change(coin_value_list, change)
 
     print(
         f"change: {change}, expected_min_coins: {expected_min_coins}, actual_min_coins: {actual_min_coins}"
     )
 
-    assert actual_min_coins == expected_min_coins, (
-        f"Expected {expected_min_coins}, but got {actual_min_coins}"
-    )
+    assert (
+        actual_min_coins == expected_min_coins
+    ), f"Expected {expected_min_coins}, but got {actual_min_coins}"

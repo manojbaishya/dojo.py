@@ -6,4 +6,7 @@
     "python.testing.pytestArgs": [
         "--capture=no"
     ],
+    "python.analysis.ignore": [
+        ".venv"
+    ]
 }

@@ -1,4 +1,9 @@
-def memo_mc(coin_value_list, change, known_results):
+from typing import Dict, List
+
+
+def memo_mc(
+    coin_value_list: List[int], change: int, known_results: Dict[int, int]
+) -> int:
     min_coins = change
     if change in coin_value_list:
         known_results[change] = 1
@@ -15,8 +20,8 @@ def memo_mc(coin_value_list, change, known_results):
     return min_coins
 
 
-def dp_make_change(coin_value_list, change):
-    min_coins = [None] * (change + 1)
+def dp_make_change(coin_value_list: List[int], change: int) -> int:
+    min_coins: List[int] = [0] * (change + 1)
     for cents in range(change + 1):
         min_coins[cents] = cents
         for c in coin_value_list:
